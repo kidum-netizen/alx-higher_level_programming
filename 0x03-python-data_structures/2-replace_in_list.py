@@ -1,4 +1,8 @@
 #!/usr/bin/python3
-element_at = __import__('1-element_at').element_at
-
-my_list = [1, 2, 3, 4, 5]
+def replace_in_list(my_list, idx, element):
+    if idx < 0:
+        return my_list
+    if idx >= len(my_list):
+        return my_list
+    my_list[idx] = element
+    return my_list
