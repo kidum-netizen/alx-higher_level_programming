@@ -1,12 +1,19 @@
 #!/usr/bin/python3
-""" Script that fetches from a url using urllib package"""
+"""
+A python script that fetches and displays a website
+"""
 
-import urllib.request as request
+if __name__ == '__main__':
+    import urllib.parse
+    import urllib.request
 
-if __name__ == "__main__":
-    with request.urlopen('https://intranet.hbtn.io/status') as r:
-        html = r.read()
-        print("Body response:")
-        print("\t- type: {}".format(type(html)))
-        print("\t- content: {}".format(html))
-        print("\t- utf8 content: {}".format(html.decode('utf-8')))
+    url = 'https://alx-intranet.hbtn.io/status'
+    req = urllib.request.Request(url)
+
+    with urllib.request.urlopen(req) as page:
+        html = page.read()
+
+    print("Body response:")
+    print("\t- type: {}".format(type(html)))
+    print("\t- content: {}".format(html))
+    print("\t- utf8 content: {}".format(str(html, "utf-8")))
