@@ -1,15 +1,29 @@
 #!/usr/bin/python3
-""" Github commits code challenge"""
 
-import requests
-from sys import argv
+"""A script that pulls out 10 commits from a repo
+"""
 
 if __name__ == '__main__':
-    url = "https://api.github.com/repos/{}/{}commits"\
-          .format(argv[2], argv[1])
-    r = requests.get(url)
-    commits = r.json()
+    import requests
+    import sys
 
-    for commit in commits[:10]:
-        print(commit.get('sha'), end=': ')
-        print(commit.get('commit').get('author').get('name'))
+    repo = sys.argv[1]
+    owner = sys.argv[2]
+
+    r = 'https://api.github.com/repos/{}/{}/commits'.format(owner, repo)
+
+    req = requests.get(r)
+
+    j_data = req.json()
+
+    counter = 0
+
+    for data in j_data:
+        sha = data.get('sha')
+        author = data.get('commit').get('author').get('name')
+
+        print('{}: {}'.format(sha, author))
+        counter += 1
+
+        if counter >= 10:
+            break
